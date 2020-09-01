@@ -111,7 +111,6 @@
 //   }
 
 //   removeItem(item) {
-//     // for (const element of goods) {
 //     if (this.items.includes(item)) {
 //       this.items.splice(1, 1);
 //     }
@@ -161,13 +160,57 @@
 // =====================================================================================================
 //
 
-       ПЕРЕИСПОЛЬЗОВАНИЕ МЕТОДОВ КЛАССА
-Напиши класс StringBuilder.На вход он получает один параметр - строку, которую записывает в свойство _value.
+//        ПЕРЕИСПОЛЬЗОВАНИЕ МЕТОДОВ КЛАССА
+// Напиши класс StringBuilder.На вход он получает один параметр - строку, которую записывает в свойство _value.
 
-Добавь классу следующий функционал:
+// Добавь классу следующий функционал:
 
-Геттер value - возвращает текущее значение поля _value
-Метод append(str) - получает параметр str(строку) и добавляет ее в конец _value
-Метод prepend(str) - получает параметр str(строку) и добавляет ее в начало value
-Метод pad(str) - получает параметр str(строку) и добавляет ее в начало и в конец _value
-Метод pad должен использовать методы append и prepend
+// Геттер value - возвращает текущее значение поля _value
+// Метод append(str) - получает параметр str(строку) и добавляет ее в конец _value
+// Метод prepend(str) - получает параметр str(строку) и добавляет ее в начало value
+// Метод pad(str) - получает параметр str(строку) и добавляет ее в начало и в конец _value
+// Метод pad должен использовать методы append и prepend
+
+// -------------------------------------   Решение   ---------------------------------------------------
+//
+
+// Write code under this line
+class StringBuilder {
+  constructor(string) {
+    this._value = string;
+  }
+
+  get value() {
+    return this._value;
+  }
+
+  set value(newValue) {
+    this._value = newValue;
+  }
+
+  append(str) {
+    return (this._value = [this._value] + str);
+  }
+
+  prepend(str) {
+    return (this._value = str + [this._value]);
+  }
+}
+
+// -----------------------------------------------------------------------------------------------------
+//
+
+console.log(typeof StringBuilder);
+// 'function'  ------ OK
+
+const builder = new StringBuilder(".");
+console.log(builder._value); // '.'   ---------- OK
+
+builder.append("^");
+console.log(builder.value); // '.^' ------------ OK
+
+builder.prepend("^");
+console.log(builder.value); // '^.^' ----------- OK
+
+// builder.pad('=');
+// console.log(builder.value); // '=^.^='
