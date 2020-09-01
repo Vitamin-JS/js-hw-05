@@ -195,6 +195,12 @@ class StringBuilder {
   prepend(str) {
     return (this._value = str + [this._value]);
   }
+
+  pad(str) {
+    this.append(str);
+    this.prepend(str);
+    return this._value;
+  }
 }
 
 // -----------------------------------------------------------------------------------------------------
@@ -212,5 +218,5 @@ console.log(builder.value); // '.^' ------------ OK
 builder.prepend("^");
 console.log(builder.value); // '^.^' ----------- OK
 
-// builder.pad('=');
-// console.log(builder.value); // '=^.^='
+builder.pad("=");
+console.log(builder.value); // '=^.^=' --------- OK
