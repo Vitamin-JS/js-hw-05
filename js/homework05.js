@@ -301,14 +301,14 @@
 //  +    */
 //  +   decelerate(value) { }
 
-//     /*
-//      * Этот метод должен добавлять к свойству
-//      * `distance` пробег в километрах,
-//      * т.е. hours * speed,
-//      * но только в том случае,
-//      * если машина заведена!
-//      */ if (this.isOn) {this.distance = this.distance + this.speed*hours }
-//     drive(hours) { }
+//  +   /*
+//  +    * Этот метод должен добавлять к свойству
+//  +    * `distance` пробег в километрах,
+//  +    * т.е. hours * speed,
+//  +    * но только в том случае,
+//  +    * если машина заведена!
+//  +    */ if (this.isOn) {this.distance = this.distance + this.speed*hours }
+//  +   drive(hours) { }
 // }
 
 // #### Пример 1.
@@ -344,50 +344,57 @@ class Car {
   // Write code under this line
 
   getSpecs(car) {
-    return `maxSpeed: ${this.maxSpeed}, speed: ${this.speed}, isOn: ${this.isOn}, distance: ${this.distance}, price: ${this.price}`;
+    // console.log(hello);
+    return `maxSpeed: ${this.maxSpeed}, speed: ${this.speed}, isOn: ${this.isOn},
+             distance: ${this.distance}, price: ${this._price}`;
   }
 
-  constructor({ maxSpeed, distance } = {}) {
-    (this.maxSpeed = maxSpeed),
-      (this.speed = 0),
-      (this.isOn = true),
-      (this.distance = 0),
-      (this._price = 0);
+  constructor({ maxSpeed, price } = {}) {
+    this.maxSpeed = maxSpeed;
+    this.speed = 0;
+    this.isOn = false;
+    this.distance = 0;
+    this._price = price;
   }
 
   get price() {
     return this._price;
   }
+
   set price(value) {
     this._price = value;
   }
 
   turnOn() {
-    this.isOn = true;
+    return (this.isOn = true);
   }
 
   turnOff() {
-    this.isOn = false;
     this.speed = 0;
+    this.isOn = false;
+    return this.isOn;
   }
 
   accelerate(value) {
-    if (this._speed + value <= this.maxSpeed) {
-      this._speed = this._speed + value;
+    if (this.speed + value <= this.maxSpeed) {
+      this.speed += value;
     }
     return this._speed;
   }
 
   decelerate(value) {
-    if (this._speed > 0) {
-      this._speed = this._speed - value;
+    if (this.speed > 0) {
+      this.speed -= value;
     }
+
+    return this.speed;
   }
 
   drive(hours) {
     if (this.isOn) {
-      this.distance = this.distance + this.speed * hours;
+      this.distance += this.speed * hours;
     }
+    return this.distance;
   }
 }
 
